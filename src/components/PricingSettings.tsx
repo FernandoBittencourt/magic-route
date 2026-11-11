@@ -33,17 +33,30 @@ export function PricingSettings({
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-medium text-stone-800"
+        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
         aria-expanded={open}
       >
-        <span>{t('settings.title')}</span>
-        <span className="text-teal-700" aria-hidden>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-semibold text-stone-900">
+            {t('header.settings')}
+          </span>
+          <span className="mt-0.5 block text-xs text-stone-500">
+            {t('settings.panelHint')}
+          </span>
+        </span>
+        <span
+          className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-teal-600 text-lg font-medium text-white"
+          aria-hidden
+        >
           {open ? '−' : '+'}
         </span>
       </button>
 
       {open && (
         <div className="space-y-4 border-t border-stone-100 px-4 py-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-teal-800/80">
+            {t('settings.title')}
+          </p>
           <label className="block space-y-1.5">
             <span className="text-xs font-medium text-stone-600">
               {t('settings.ratePerKm')} ({currencySuffix})

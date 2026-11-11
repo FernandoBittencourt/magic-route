@@ -3,6 +3,7 @@ import type { Locale } from '../types'
 export type MessageKey =
   | 'app.subtitle'
   | 'header.settings'
+  | 'settings.panelHint'
   | 'locale.pt'
   | 'locale.en'
   | 'form.origin'
@@ -38,6 +39,7 @@ type Messages = Record<MessageKey, string>
 const pt: Messages = {
   'app.subtitle': 'Taxa por distância no atendimento a domicílio',
   'header.settings': 'Configurações',
+  'settings.panelHint': 'Defina taxa, mínimo, máximo e endereço base.',
   'locale.pt': 'PT',
   'locale.en': 'EN',
   'form.origin': 'Origem',
@@ -74,6 +76,7 @@ const pt: Messages = {
 const en: Messages = {
   'app.subtitle': 'Distance-based pricing for home visits',
   'header.settings': 'Settings',
+  'settings.panelHint': 'Set rate, min, max, and base address.',
   'locale.pt': 'PT',
   'locale.en': 'EN',
   'form.origin': 'Origin',

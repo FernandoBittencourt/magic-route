@@ -104,26 +104,19 @@ export default function App() {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setSettingsOpen((v) => !v)}
-          className="text-sm font-medium text-teal-700 underline-offset-2 hover:underline"
-        >
-          {t('header.settings')}
-        </button>
       </header>
-
-      <RouteMap
-        origin={originPoint}
-        destination={destinationPoint}
-        geometry={geometry}
-      />
 
       <PricingSettings
         config={pricing}
         onChange={setPricing}
         open={settingsOpen}
         onToggle={() => setSettingsOpen((v) => !v)}
+      />
+
+      <RouteMap
+        origin={originPoint}
+        destination={destinationPoint}
+        geometry={geometry}
       />
 
       <QuoteForm
