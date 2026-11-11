@@ -113,12 +113,6 @@ export default function App() {
         onToggle={() => setSettingsOpen((v) => !v)}
       />
 
-      <RouteMap
-        origin={originPoint}
-        destination={destinationPoint}
-        geometry={geometry}
-      />
-
       <QuoteForm
         origin={originInput}
         destination={destinationInput}
@@ -127,6 +121,12 @@ export default function App() {
         onSubmit={handleCalculate}
         loading={loading}
         error={error}
+      />
+
+      <RouteMap
+        origin={originPoint}
+        destination={destinationPoint}
+        geometry={geometry}
       />
 
       <QuoteResult quote={quote} />
