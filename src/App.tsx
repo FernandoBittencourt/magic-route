@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, type Dispatch, type SetStateAction } from 'react'
 import { PricingSettings } from './components/PricingSettings'
 import { QuoteForm } from './components/QuoteForm'
 import { QuoteResult } from './components/QuoteResult'
@@ -24,6 +24,19 @@ export default function App() {
   const [destinationPoint, setDestinationPoint] = useState<LatLon | null>(null)
   const [geometry, setGeometry] = useState<GeoJSON.LineString | null>(null)
   const [quote, setQuote] = useState<QuoteResultType | null>(null)
+
+  const updatePricing: Dispatch<SetStateAction<PricingConfig>> = useCallback(
+    (action) => {
+      setPricing((prev) => {
+        const next = typeof action === 'function' ? action(prev) : action
+        if (next.baseAddress !== prev.baseAddress) {
+          setOriginInput(next.baseAddress)
+        }
+        return next
+      })
+    },
+    [],
+  )
 
   const handleCalculate = useCallback(async () => {
     setError(null)
@@ -108,7 +121,7 @@ export default function App() {
 
       <PricingSettings
         config={pricing}
-        onChange={setPricing}
+        onChange={updatePricing}
         open={settingsOpen}
         onToggle={() => setSettingsOpen((v) => !v)}
       />

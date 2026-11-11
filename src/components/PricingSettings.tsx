@@ -81,6 +81,9 @@ export function PricingSettings({
             <span className="text-xs font-medium text-stone-600">
               {t('settings.baseAddress')}
             </span>
+            <span className="block text-xs leading-relaxed text-stone-500">
+              {t('settings.baseAddressHint')}
+            </span>
             <input
               type="text"
               value={config.baseAddress}

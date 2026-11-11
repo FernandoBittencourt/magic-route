@@ -14,6 +14,7 @@ export type MessageKey =
   | 'settings.title'
   | 'settings.ratePerKm'
   | 'settings.baseAddress'
+  | 'settings.baseAddressHint'
   | 'settings.min.title'
   | 'settings.min.enabled'
   | 'settings.min.distance'
@@ -51,6 +52,8 @@ const pt: Messages = {
   'settings.title': 'Regras de preço',
   'settings.ratePerKm': 'Valor por km',
   'settings.baseAddress': 'Endereço base (opcional)',
+  'settings.baseAddressHint':
+    'Preenche o campo Origem automaticamente (seu ponto de partida fixo).',
   'settings.min.title': 'Valor mínimo (opcional)',
   'settings.min.enabled': 'Usar valor fixo abaixo da distância',
   'settings.min.distance': 'Distância limite (metros)',
@@ -88,6 +91,8 @@ const en: Messages = {
   'settings.title': 'Pricing rules',
   'settings.ratePerKm': 'Rate per km',
   'settings.baseAddress': 'Base address (optional)',
+  'settings.baseAddressHint':
+    'Fills the Origin field automatically (your usual starting point).',
   'settings.min.title': 'Minimum charge (optional)',
   'settings.min.enabled': 'Flat fee below distance threshold',
   'settings.min.distance': 'Distance threshold (meters)',
