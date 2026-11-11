@@ -22,7 +22,9 @@ Abra o link acima no celular, configure a taxa por km em **Configurações** e u
 ## Features
 
 - Route distance via [OSRM](https://project-osrm.org/) (OpenStreetMap Germany demo)
-- Address geocoding via [Nominatim](https://nominatim.org/) (OSM)
+- Address **autocomplete** while typing via [Photon](https://photon.komoot.io/) (Komoot / OSM)
+- Address geocoding on submit via [Nominatim](https://nominatim.org/) when you type without picking a suggestion
+- Optional **browser location** to bias suggestions, show “you are here” on the map, or fill origin via reverse geocode
 - Optional minimum (flat fee below a distance threshold) and maximum cap
 - Optional saved base address
 - Portuguese / English UI toggle
@@ -52,10 +54,12 @@ Hosted on **GitHub Pages** for `FernandoBittencourt/magic-route`. After cloning,
 
 | Service | Policy highlights |
 |---------|-------------------|
-| **Nominatim** | Max **1 request/second** per app; identifiable `User-Agent`; OSM attribution; user-triggered searches only (no autocomplete). |
+| **Photon** | Search-as-you-type suggestions (debounced, min 3 characters). Reasonable public use; no API key. |
+| **Nominatim** | Max **1 request/second** per app; identifiable `User-Agent`; OSM attribution; **submit-time fallback only** (no Nominatim autocomplete). |
 | **OSRM demo** | Reasonable non-commercial use; no SLA. |
+| **Geolocation** | Optional one-shot `getCurrentPosition` after a button tap (HTTPS required — GitHub Pages qualifies). No continuous GPS tracking. |
 
-Magic Route batches geocoding (origin, then ~1.1s later destination) and one route request per calculation.
+When both origin and destination are chosen from Photon (or origin from “use here”), Magic Route skips Nominatim and calls OSRM once. Otherwise it geocodes only the unresolved field(s) on calculate.
 
 ## Currency note
 

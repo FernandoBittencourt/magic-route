@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import {
+  CircleMarker,
   MapContainer,
   Marker,
   Polyline,
@@ -58,11 +59,17 @@ interface RouteMapProps {
   origin: LatLon | null
   destination: LatLon | null
   geometry: GeoJSON.LineString | null
+  userLocation?: { lat: number; lon: number } | null
 }
 
 const DEFAULT_CENTER: [number, number] = [-15.793889, -47.882778]
 
-export function RouteMap({ origin, destination, geometry }: RouteMapProps) {
+export function RouteMap({
+  origin,
+  destination,
+  geometry,
+  userLocation = null,
+}: RouteMapProps) {
   const center: [number, number] = origin
     ? [origin.lat, origin.lon]
     : DEFAULT_CENTER
@@ -86,6 +93,18 @@ export function RouteMap({ origin, destination, geometry }: RouteMapProps) {
         <FitRoute origin={origin} destination={destination} geometry={geometry} />
         {origin && <Marker position={[origin.lat, origin.lon]} />}
         {destination && <Marker position={[destination.lat, destination.lon]} />}
+        {userLocation && (
+          <CircleMarker
+            center={[userLocation.lat, userLocation.lon]}
+            radius={8}
+            pathOptions={{
+              color: '#0f766e',
+              fillColor: '#14b8a6',
+              fillOpacity: 0.9,
+              weight: 2,
+            }}
+          />
+        )}
         {linePositions.length > 0 && (
           <Polyline positions={linePositions} pathOptions={{ color: '#0f766e', weight: 5 }} />
         )}

@@ -1,11 +1,25 @@
 import type { FormEvent } from 'react'
 import { useI18n } from '../i18n/I18nProvider'
+import type { LocationBias, LocationBiasStatus } from '../lib/locationBias'
+import {
+  AddressAutocomplete,
+  type AddressPick,
+} from './AddressAutocomplete'
+import { LocationBiasControls } from './LocationBiasControls'
 
 interface QuoteFormProps {
   origin: string
   destination: string
   onOriginChange: (value: string) => void
   onDestinationChange: (value: string) => void
+  onOriginSelect: (pick: AddressPick) => void
+  onDestinationSelect: (pick: AddressPick) => void
+  locationStatus: LocationBiasStatus
+  onLocationEnable: () => void
+  onLocationDisable: () => void
+  onUseAsOrigin: () => void
+  useAsOriginLoading: boolean
+  locationBias: LocationBias | null
   onSubmit: () => void
   loading: boolean
   error: string | null
@@ -16,6 +30,14 @@ export function QuoteForm({
   destination,
   onOriginChange,
   onDestinationChange,
+  onOriginSelect,
+  onDestinationSelect,
+  locationStatus,
+  onLocationEnable,
+  onLocationDisable,
+  onUseAsOrigin,
+  useAsOriginLoading,
+  locationBias,
   onSubmit,
   loading,
   error,
@@ -32,31 +54,33 @@ export function QuoteForm({
       onSubmit={handleSubmit}
       className="receipt-surface space-y-3 p-4"
     >
+      <LocationBiasControls
+        status={locationStatus}
+        onEnable={onLocationEnable}
+        onDisable={onLocationDisable}
+        onUseAsOrigin={onUseAsOrigin}
+        useAsOriginLoading={useAsOriginLoading}
+      />
+
       <p className="text-[11px] leading-relaxed text-stone-500">
         {t('form.addressHint')}
       </p>
 
-      <label className="block space-y-1">
-        <span className="receipt-label">{t('form.origin')}</span>
-        <input
-          type="text"
-          autoComplete="street-address"
-          value={origin}
-          onChange={(e) => onOriginChange(e.target.value)}
-          className="input-receipt receipt-mono text-sm"
-        />
-      </label>
+      <AddressAutocomplete
+        label={t('form.origin')}
+        value={origin}
+        onChange={onOriginChange}
+        onSelect={onOriginSelect}
+        bias={locationBias}
+      />
 
-      <label className="block space-y-1">
-        <span className="receipt-label">{t('form.destination')}</span>
-        <input
-          type="text"
-          autoComplete="street-address"
-          value={destination}
-          onChange={(e) => onDestinationChange(e.target.value)}
-          className="input-receipt receipt-mono text-sm"
-        />
-      </label>
+      <AddressAutocomplete
+        label={t('form.destination')}
+        value={destination}
+        onChange={onDestinationChange}
+        onSelect={onDestinationSelect}
+        bias={locationBias}
+      />
 
       {error && (
         <p

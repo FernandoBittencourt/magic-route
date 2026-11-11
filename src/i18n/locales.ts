@@ -9,6 +9,16 @@ export type MessageKey =
   | 'form.origin'
   | 'form.destination'
   | 'form.addressHint'
+  | 'form.autocomplete.loading'
+  | 'form.autocomplete.empty'
+  | 'form.autocomplete.error'
+  | 'form.location.enable'
+  | 'form.location.update'
+  | 'form.location.disable'
+  | 'form.location.loading'
+  | 'form.location.useAsOrigin'
+  | 'form.location.denied'
+  | 'form.location.hintNearby'
   | 'form.calculate'
   | 'form.calculating'
   | 'settings.title'
@@ -41,6 +51,7 @@ export type MessageKey =
   | 'errors.generic'
   | 'attribution.osm'
   | 'attribution.osrm'
+  | 'attribution.photon'
 
 type Messages = Record<MessageKey, string>
 
@@ -53,7 +64,19 @@ const pt: Messages = {
   'form.origin': 'Origem',
   'form.destination': 'Destino',
   'form.addressHint':
-    'Digite o endereço em português para melhor resultado no Brasil.',
+    'Digite o endereço em português para melhor resultado no Brasil. Escolha uma sugestão ou envie o texto completo.',
+  'form.autocomplete.loading': 'Buscando…',
+  'form.autocomplete.empty': 'Nenhum endereço encontrado.',
+  'form.autocomplete.error': 'Falha nas sugestões. Tente de novo.',
+  'form.location.enable': 'Usar minha localização',
+  'form.location.update': 'Atualizar localização',
+  'form.location.disable': 'Desativar',
+  'form.location.loading': 'Obtendo localização…',
+  'form.location.useAsOrigin': 'Usar aqui como origem',
+  'form.location.denied':
+    'Permissão de localização negada. O autocomplete continua funcionando.',
+  'form.location.hintNearby':
+    'Com a localização ativa, as sugestões priorizam endereços próximos.',
   'form.calculate': 'Calcular valor',
   'form.calculating': 'Calculando…',
   'settings.title': 'Regras de preço',
@@ -89,6 +112,7 @@ const pt: Messages = {
   'errors.generic': 'Algo deu errado. Tente novamente.',
   'attribution.osm': 'Dados do mapa © OpenStreetMap',
   'attribution.osrm': 'Rota via OSRM',
+  'attribution.photon': 'Sugestões via Photon (Komoot)',
 }
 
 const en: Messages = {
@@ -100,7 +124,19 @@ const en: Messages = {
   'form.origin': 'Origin',
   'form.destination': 'Destination',
   'form.addressHint':
-    'Use the local language for the address (e.g. Portuguese in Brazil).',
+    'Use the local language for the address. Pick a suggestion or submit full text.',
+  'form.autocomplete.loading': 'Searching…',
+  'form.autocomplete.empty': 'No addresses found.',
+  'form.autocomplete.error': 'Suggestions failed. Try again.',
+  'form.location.enable': 'Use my location',
+  'form.location.update': 'Refresh location',
+  'form.location.disable': 'Turn off',
+  'form.location.loading': 'Getting location…',
+  'form.location.useAsOrigin': 'Use here as origin',
+  'form.location.denied':
+    'Location permission denied. Autocomplete still works.',
+  'form.location.hintNearby':
+    'With location on, suggestions rank addresses near you.',
   'form.calculate': 'Calculate quote',
   'form.calculating': 'Calculating…',
   'settings.title': 'Pricing rules',
@@ -135,6 +171,7 @@ const en: Messages = {
   'errors.generic': 'Something went wrong. Please try again.',
   'attribution.osm': 'Map data © OpenStreetMap',
   'attribution.osrm': 'Routing via OSRM',
+  'attribution.photon': 'Search suggestions via Photon (Komoot)',
 }
 
 const table: Record<Locale, Messages> = { pt, en }

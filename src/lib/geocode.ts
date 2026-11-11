@@ -66,6 +66,16 @@ export async function geocodeAddress(
   }
 }
 
+/** Use Photon/Nominatim-resolved coords when present; otherwise geocode text on submit. */
+export async function resolveLatLon(
+  text: string,
+  locale: Locale,
+  resolved: LatLon | null,
+): Promise<LatLon> {
+  if (resolved) return resolved
+  return geocodeAddress(text, locale)
+}
+
 /** Geocode origin then destination with Nominatim rate-limit gap. */
 export async function geocodePair(
   origin: string,

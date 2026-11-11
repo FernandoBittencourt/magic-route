@@ -5,16 +5,27 @@ import {
   type Dispatch,
   type SetStateAction,
 } from 'react'
+import type { AddressPick } from './components/AddressAutocomplete'
 import { PricingSettings } from './components/PricingSettings'
 import { QuoteForm } from './components/QuoteForm'
 import { QuoteResult } from './components/QuoteResult'
 import { RouteMap } from './components/RouteMap'
 import { useI18n } from './i18n/I18nProvider'
-import { GeocodeError, geocodePair } from './lib/geocode'
+import { GeocodeError, resolveLatLon } from './lib/geocode'
+import { useLocationBias } from './lib/locationBias'
 import { calculateQuote } from './lib/pricing'
+import { reversePhoton } from './lib/photon'
 import { RouteError, fetchRoute } from './lib/route'
 import { loadPricingConfig } from './lib/storage'
 import type { LatLon, PricingConfig, QuoteResult as QuoteResultType } from './types'
+
+function pickToLatLon(pick: AddressPick): LatLon {
+  return {
+    lat: pick.lat,
+    lon: pick.lon,
+    displayName: pick.label,
+  }
+}
 
 export default function App() {
   const { t, locale, setLocale } = useI18n()
@@ -23,8 +34,15 @@ export default function App() {
   const pricingRef = useRef<PricingConfig>(initialPricing)
   const [settingsOpen, setSettingsOpen] = useState(false)
 
+  const { bias, status: locationStatus, requestLocation, disableLocation } =
+    useLocationBias()
+
   const [originInput, setOriginInput] = useState(() => loadPricingConfig().baseAddress)
   const [destinationInput, setDestinationInput] = useState('')
+  const [originResolved, setOriginResolved] = useState<LatLon | null>(null)
+  const [destinationResolved, setDestinationResolved] = useState<LatLon | null>(null)
+  const [useAsOriginLoading, setUseAsOriginLoading] = useState(false)
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -43,6 +61,7 @@ export default function App() {
               ? next.baseAddress
               : origin,
           )
+          setOriginResolved(null)
         }
         pricingRef.current = next
         return next
@@ -51,11 +70,63 @@ export default function App() {
     [],
   )
 
+  const handleOriginChange = useCallback((value: string) => {
+    setOriginInput(value)
+    setOriginResolved(null)
+  }, [])
+
+  const handleDestinationChange = useCallback((value: string) => {
+    setDestinationInput(value)
+    setDestinationResolved(null)
+  }, [])
+
+  const handleOriginSelect = useCallback((pick: AddressPick) => {
+    setOriginInput(pick.label)
+    setOriginResolved(pickToLatLon(pick))
+  }, [])
+
+  const handleDestinationSelect = useCallback((pick: AddressPick) => {
+    setDestinationInput(pick.label)
+    setDestinationResolved(pickToLatLon(pick))
+  }, [])
+
+  const handleLocationEnable = useCallback(async () => {
+    setError(null)
+    await requestLocation()
+  }, [requestLocation])
+
+  const handleUseAsOrigin = useCallback(async () => {
+    setError(null)
+    setUseAsOriginLoading(true)
+    try {
+      let coords = bias
+      if (!coords) {
+        coords = await requestLocation()
+      }
+      if (!coords) return
+
+      const suggestion = await reversePhoton(coords.lat, coords.lon, locale)
+      if (!suggestion) {
+        setError(t('errors.geocodeNotFound'))
+        return
+      }
+      setOriginInput(suggestion.label)
+      setOriginResolved({
+        lat: suggestion.lat,
+        lon: suggestion.lon,
+        displayName: suggestion.label,
+      })
+    } catch {
+      setError(t('errors.geocodeNetwork'))
+    } finally {
+      setUseAsOriginLoading(false)
+    }
+  }, [bias, locale, requestLocation, t])
+
   const handleCalculate = useCallback(async () => {
     setError(null)
     setQuote(null)
 
-    // Commit focused numeric inputs (blur) before using pricing rules
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur()
     }
@@ -74,11 +145,12 @@ export default function App() {
 
     setLoading(true)
     try {
-      const points = await geocodePair(origin, destination, locale)
-      setOriginPoint(points.origin)
-      setDestinationPoint(points.destination)
+      const from = await resolveLatLon(origin, locale, originResolved)
+      const to = await resolveLatLon(destination, locale, destinationResolved)
+      setOriginPoint(from)
+      setDestinationPoint(to)
 
-      const route = await fetchRoute(points.origin, points.destination)
+      const route = await fetchRoute(from, to)
       const breakdown = calculateQuote(route.distanceMeters, pricingRef.current)
 
       setGeometry(route.geometry)
@@ -106,7 +178,14 @@ export default function App() {
     } finally {
       setLoading(false)
     }
-  }, [destinationInput, locale, originInput, pricing, t])
+  }, [
+    destinationInput,
+    destinationResolved,
+    locale,
+    originInput,
+    originResolved,
+    t,
+  ])
 
   return (
     <div className="mx-auto flex min-h-full max-w-lg flex-col gap-3 px-4 py-4 pb-8">
@@ -153,8 +232,16 @@ export default function App() {
       <QuoteForm
         origin={originInput}
         destination={destinationInput}
-        onOriginChange={setOriginInput}
-        onDestinationChange={setDestinationInput}
+        onOriginChange={handleOriginChange}
+        onDestinationChange={handleDestinationChange}
+        onOriginSelect={handleOriginSelect}
+        onDestinationSelect={handleDestinationSelect}
+        locationStatus={locationStatus}
+        onLocationEnable={handleLocationEnable}
+        onLocationDisable={disableLocation}
+        onUseAsOrigin={handleUseAsOrigin}
+        useAsOriginLoading={useAsOriginLoading}
+        locationBias={bias}
         onSubmit={handleCalculate}
         loading={loading}
         error={error}
@@ -164,6 +251,7 @@ export default function App() {
         origin={originPoint}
         destination={destinationPoint}
         geometry={geometry}
+        userLocation={bias}
       />
 
       <QuoteResult quote={quote} />
@@ -180,6 +268,16 @@ export default function App() {
           </a>
         </p>
         <p>{t('attribution.osrm')}</p>
+        <p>
+          <a
+            href="https://photon.komoot.io/"
+            className="underline-offset-2 hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t('attribution.photon')}
+          </a>
+        </p>
       </footer>
     </div>
   )
