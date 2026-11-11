@@ -1,0 +1,59 @@
+# Magic Route
+
+Static, mobile-first web app to draw a driving route on the map and quote a home visit from distance-based pricing rules. No backend and no database — settings live in `localStorage`.
+
+**Live site (after GitHub Pages deploy):** [https://fernando-bittencourt.github.io/magic-route/](https://fernando-bittencourt.github.io/magic-route/)
+
+## Para usuários brasileiros
+
+Abra o link acima no celular, configure a taxa por km em **Configurações** e use endereços em **português** para melhor resultado no Brasil. Moeda **R$** no idioma PT; **$** (USD display) no idioma EN — stored amounts are plain numbers (no exchange).
+
+## Features
+
+- Route distance via [OSRM](https://project-osrm.org/) (OpenStreetMap Germany demo)
+- Address geocoding via [Nominatim](https://nominatim.org/) (OSM)
+- Optional minimum (flat fee below a distance threshold) and maximum cap
+- Optional saved base address
+- Portuguese / English UI toggle
+- GitHub Pages deployment workflow
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+Dev server: `http://127.0.0.1:4321/magic-route/`
+
+```bash
+npm run build
+npm run preview
+```
+
+## GitHub Pages
+
+1. Create a public repo `fernando-bittencourt/magic-route` and push this project to `main`.
+2. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. The workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) publishes `dist/` on each push to `main`.
+
+`vite.config.ts` sets `base: '/magic-route/'` for project-site URLs.
+
+## API usage (free tiers)
+
+| Service | Policy highlights |
+|---------|-------------------|
+| **Nominatim** | Max **1 request/second** per app; identifiable `User-Agent`; OSM attribution; user-triggered searches only (no autocomplete). |
+| **OSRM demo** | Reasonable non-commercial use; no SLA. |
+
+Magic Route batches geocoding (origin, then ~1.1s later destination) and one route request per calculation.
+
+## Currency note
+
+- **PT** locale: BRL (`R$`) formatting  
+- **EN** locale: USD (`$`) formatting  
+- Saved rate/min/max values are not converted when switching language.
+
+## License
+
+MIT (app code). Map and routing data remain under [ODbL](https://www.openstreetmap.org/copyright) / respective service terms.
