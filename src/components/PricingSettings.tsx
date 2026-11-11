@@ -89,7 +89,7 @@ export function PricingSettings({
             />
           </label>
 
-          <fieldset className="space-y-3 border border-dashed border-teal-200 bg-teal-50/30 p-3">
+          <fieldset className="space-y-3 border border-teal-200 bg-teal-50/30 p-3">
             <legend className="text-xs font-semibold text-stone-700">
               {t('settings.min.title')}
             </legend>
@@ -143,7 +143,7 @@ export function PricingSettings({
             )}
           </fieldset>
 
-          <fieldset className="space-y-3 border border-dashed border-teal-200 bg-teal-50/30 p-3">
+          <fieldset className="space-y-3 border border-teal-200 bg-teal-50/30 p-3">
             <legend className="text-xs font-semibold text-stone-700">
               {t('settings.max.title')}
             </legend>
@@ -178,7 +178,7 @@ export function PricingSettings({
             )}
           </fieldset>
 
-          <fieldset className="space-y-3 border border-dashed border-teal-200 bg-teal-50/30 p-3">
+          <fieldset className="space-y-3 border border-teal-200 bg-teal-50/30 p-3">
             <legend className="text-xs font-semibold text-stone-700">
               {t('settings.roundToTen.title')}
             </legend>

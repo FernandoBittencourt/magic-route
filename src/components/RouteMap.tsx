@@ -72,7 +72,7 @@ export function RouteMap({ origin, destination, geometry }: RouteMapProps) {
     []
 
   return (
-    <div className="h-[36vh] min-h-[180px] w-full overflow-hidden border-2 border-dashed border-teal-300 bg-white">
+    <div className="receipt-surface h-[36vh] min-h-[180px] w-full overflow-hidden">
       <MapContainer
         center={center}
         zoom={origin ? 13 : 4}
