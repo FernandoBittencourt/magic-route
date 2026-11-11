@@ -6,6 +6,15 @@ Static, mobile-first web app to draw a driving route on the map and quote a home
 
 **Source repo:** [github.com/FernandoBittencourt/magic-route](https://github.com/FernandoBittencourt/magic-route)
 
+## Releases
+
+| Tag | Description |
+|-----|-------------|
+| [`v1.2.0`](https://github.com/FernandoBittencourt/magic-route/releases/tag/v1.2.0) | **Current** — D3 teal receipt UI (live on GitHub Pages) |
+| [`v1.1.0`](https://github.com/FernandoBittencourt/magic-route/releases/tag/v1.1.0) | Previous classic card UI (before D3) |
+
+GitHub Pages always deploys `main` (currently **v1.2.0**). To run the old UI locally: `git checkout v1.1.0 && npm ci && npm run dev`.
+
 ## Para usuários brasileiros
 
 Abra o link acima no celular, configure a taxa por km em **Configurações** e use endereços em **português** para melhor resultado no Brasil. Moeda **R$** no idioma PT; **$** (USD display) no idioma EN — stored amounts are plain numbers (no exchange).
