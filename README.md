@@ -2,7 +2,9 @@
 
 Static, mobile-first web app to draw a driving route on the map and quote a home visit from distance-based pricing rules. No backend and no database — settings live in `localStorage`.
 
-**Live site (after GitHub Pages deploy):** [https://fernando-bittencourt.github.io/magic-route/](https://fernando-bittencourt.github.io/magic-route/)
+**Live site (GitHub Pages):** [https://fernandobittencourt.github.io/magic-route/](https://fernandobittencourt.github.io/magic-route/)
+
+**Source repo:** [github.com/FernandoBittencourt/magic-route](https://github.com/FernandoBittencourt/magic-route)
 
 ## Para usuários brasileiros
 
@@ -33,9 +35,7 @@ npm run preview
 
 ## GitHub Pages
 
-1. Create a public repo `fernando-bittencourt/magic-route` and push this project to `main`.
-2. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. The workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) publishes `dist/` on each push to `main`.
+Hosted on **GitHub Pages** for `FernandoBittencourt/magic-route`. After cloning, enable **Settings → Pages → Source: GitHub Actions** once (already done on the main repo). Each push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) and publishes `dist/`.
 
 `vite.config.ts` sets `base: '/magic-route/'` for project-site URLs.
 
