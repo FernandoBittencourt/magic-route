@@ -26,6 +26,9 @@ export type MessageKey =
   | 'result.distance'
   | 'result.duration'
   | 'result.price'
+  | 'result.proportional'
+  | 'result.minApplied'
+  | 'result.maxApplied'
   | 'errors.emptyOrigin'
   | 'errors.emptyDestination'
   | 'errors.geocodeNotFound'
@@ -65,6 +68,9 @@ const pt: Messages = {
   'result.distance': 'Distância',
   'result.duration': 'Tempo estimado',
   'result.price': 'Valor',
+  'result.proportional': 'Só pela distância',
+  'result.minApplied': 'Mínimo (abaixo do limite em m)',
+  'result.maxApplied': 'Teto máximo aplicado',
   'errors.emptyOrigin': 'Informe a origem.',
   'errors.emptyDestination': 'Informe o destino.',
   'errors.geocodeNotFound':
@@ -104,6 +110,9 @@ const en: Messages = {
   'result.distance': 'Distance',
   'result.duration': 'Estimated time',
   'result.price': 'Amount',
+  'result.proportional': 'Distance only',
+  'result.minApplied': 'Minimum (below distance threshold)',
+  'result.maxApplied': 'Maximum cap applied',
   'errors.emptyOrigin': 'Enter an origin.',
   'errors.emptyDestination': 'Enter a destination.',
   'errors.geocodeNotFound':

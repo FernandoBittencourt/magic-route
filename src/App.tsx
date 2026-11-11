@@ -1,18 +1,26 @@
-import { useCallback, useState, type Dispatch, type SetStateAction } from 'react'
+import {
+  useCallback,
+  useRef,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from 'react'
 import { PricingSettings } from './components/PricingSettings'
 import { QuoteForm } from './components/QuoteForm'
 import { QuoteResult } from './components/QuoteResult'
 import { RouteMap } from './components/RouteMap'
 import { useI18n } from './i18n/I18nProvider'
 import { GeocodeError, geocodePair } from './lib/geocode'
-import { calculateQuoteAmount } from './lib/pricing'
+import { calculateQuote } from './lib/pricing'
 import { RouteError, fetchRoute } from './lib/route'
 import { loadPricingConfig } from './lib/storage'
 import type { LatLon, PricingConfig, QuoteResult as QuoteResultType } from './types'
 
 export default function App() {
   const { t, locale, setLocale } = useI18n()
-  const [pricing, setPricing] = useState<PricingConfig>(loadPricingConfig)
+  const initialPricing = loadPricingConfig()
+  const [pricing, setPricing] = useState<PricingConfig>(initialPricing)
+  const pricingRef = useRef<PricingConfig>(initialPricing)
   const [settingsOpen, setSettingsOpen] = useState(false)
 
   const [originInput, setOriginInput] = useState(() => loadPricingConfig().baseAddress)
@@ -36,6 +44,7 @@ export default function App() {
               : origin,
           )
         }
+        pricingRef.current = next
         return next
       })
     },
@@ -45,6 +54,11 @@ export default function App() {
   const handleCalculate = useCallback(async () => {
     setError(null)
     setQuote(null)
+
+    // Commit focused numeric inputs (blur) before using pricing rules
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
 
     const origin = originInput.trim()
     const destination = destinationInput.trim()
@@ -65,13 +79,16 @@ export default function App() {
       setDestinationPoint(points.destination)
 
       const route = await fetchRoute(points.origin, points.destination)
-      const amount = calculateQuoteAmount(route.distanceMeters, pricing)
+      const breakdown = calculateQuote(route.distanceMeters, pricingRef.current)
 
       setGeometry(route.geometry)
       setQuote({
         distanceMeters: route.distanceMeters,
         durationSeconds: route.durationSeconds,
-        amount,
+        amount: breakdown.amount,
+        proportionalAmount: breakdown.proportionalAmount,
+        minRuleApplied: breakdown.minRuleApplied,
+        maxRuleApplied: breakdown.maxRuleApplied,
         geometry: route.geometry,
       })
     } catch (err) {

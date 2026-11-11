@@ -58,11 +58,19 @@ export function NumericInput({
         if (integer) {
           if (!/^-?\d*$/.test(raw)) return
           setDraft(raw)
+          if (/^\d+$/.test(raw)) {
+            const parsed = Number.parseInt(raw, 10)
+            if (Number.isFinite(parsed)) onValueChange(parsed)
+          }
           return
         }
         const normalized = raw.replace(',', '.')
         if (!/^-?\d*\.?\d*$/.test(normalized)) return
         setDraft(raw.includes(',') ? raw : normalized)
+        if (/^\d+(\.\d+)?$/.test(normalized)) {
+          const parsed = Number.parseFloat(normalized)
+          if (Number.isFinite(parsed)) onValueChange(parsed)
+        }
       }}
       onBlur={(e) => {
         focused.current = false

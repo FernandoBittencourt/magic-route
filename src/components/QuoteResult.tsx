@@ -36,6 +36,22 @@ export function QuoteResult({ quote }: QuoteResultProps) {
             {formatDuration(quote.durationSeconds, locale)}
           </dd>
         </div>
+        <div className="flex justify-between gap-4 text-stone-600">
+          <dt>{t('result.proportional')}</dt>
+          <dd className="text-right">
+            {formatMoney(quote.proportionalAmount, locale)}
+          </dd>
+        </div>
+        {quote.minRuleApplied && (
+          <p className="rounded-lg bg-white/80 px-2 py-1 text-xs font-medium text-teal-900">
+            {t('result.minApplied')}
+          </p>
+        )}
+        {quote.maxRuleApplied && (
+          <p className="rounded-lg bg-white/80 px-2 py-1 text-xs font-medium text-teal-900">
+            {t('result.maxApplied')}
+          </p>
+        )}
         <div className="flex justify-between gap-4 border-t border-teal-100 pt-3 text-base">
           <dt className="font-semibold text-stone-900">{t('result.price')}</dt>
           <dd className="text-right text-xl font-bold text-teal-800">

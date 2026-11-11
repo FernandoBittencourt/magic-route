@@ -26,5 +26,8 @@ export interface QuoteResult {
   distanceMeters: number
   durationSeconds: number
   amount: number
+  proportionalAmount: number
+  minRuleApplied: boolean
+  maxRuleApplied: boolean
   geometry: GeoJSON.LineString
 }

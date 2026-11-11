@@ -1,21 +1,45 @@
 import type { PricingConfig } from '../types'
 
-export function calculateQuoteAmount(
+export interface PricingBreakdown {
+  amount: number
+  proportionalAmount: number
+  minRuleApplied: boolean
+  maxRuleApplied: boolean
+}
+
+export function calculateQuote(
   distanceMeters: number,
   config: PricingConfig,
-): number {
-  let amount = (distanceMeters / 1000) * config.ratePerKm
+): PricingBreakdown {
+  const proportionalAmount =
+    Math.round((distanceMeters / 1000) * config.ratePerKm * 100) / 100
 
-  if (
-    config.minEnabled &&
-    distanceMeters < config.minDistanceMeters
-  ) {
+  let amount = proportionalAmount
+  let minRuleApplied = false
+  let maxRuleApplied = false
+
+  if (config.minEnabled && distanceMeters < config.minDistanceMeters) {
     amount = config.minAmount
+    minRuleApplied = true
   }
 
   if (config.maxEnabled && amount > config.maxAmount) {
     amount = config.maxAmount
+    maxRuleApplied = true
   }
 
-  return Math.round(amount * 100) / 100
+  return {
+    amount: Math.round(amount * 100) / 100,
+    proportionalAmount,
+    minRuleApplied,
+    maxRuleApplied,
+  }
+}
+
+/** @deprecated use calculateQuote */
+export function calculateQuoteAmount(
+  distanceMeters: number,
+  config: PricingConfig,
+): number {
+  return calculateQuote(distanceMeters, config).amount
 }
