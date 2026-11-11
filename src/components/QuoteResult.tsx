@@ -17,51 +17,54 @@ export function QuoteResult({ quote }: QuoteResultProps) {
 
   return (
     <section
-      className="rounded-2xl border border-teal-200 bg-gradient-to-br from-teal-50 to-white p-4 shadow-sm"
+      className="receipt-surface-dashed p-4"
       aria-live="polite"
     >
-      <h2 className="mb-3 text-sm font-semibold text-teal-900">
-        {t('result.title')}
-      </h2>
-      <dl className="space-y-2 text-sm text-stone-700">
+      <p className="receipt-label mb-3 text-center text-teal-800">
+        {t('result.receiptBanner')}
+      </p>
+      <dl className="space-y-2 text-sm text-stone-800">
         <div className="flex justify-between gap-4">
-          <dt>{t('result.distance')}</dt>
-          <dd className="text-right font-medium">
+          <dt className="receipt-label text-stone-700">{t('result.distance')}</dt>
+          <dd className="receipt-mono text-right text-sm font-medium">
             {formatDistance(quote.distanceMeters, locale)}
           </dd>
         </div>
         <div className="flex justify-between gap-4">
-          <dt>{t('result.duration')}</dt>
-          <dd className="text-right font-medium">
+          <dt className="receipt-label text-stone-700">{t('result.duration')}</dt>
+          <dd className="receipt-mono text-right text-sm font-medium">
             {formatDuration(quote.durationSeconds, locale)}
           </dd>
         </div>
         <div className="flex justify-between gap-4 text-stone-600">
-          <dt>{t('result.proportional')}</dt>
-          <dd className="text-right">
+          <dt className="receipt-label">{t('result.proportional')}</dt>
+          <dd className="receipt-mono text-right text-sm">
             {formatMoney(quote.proportionalAmount, locale)}
           </dd>
         </div>
         {quote.minRuleApplied && (
-          <p className="rounded-lg bg-white/80 px-2 py-1 text-xs font-medium text-teal-900">
+          <p className="border border-teal-100 bg-teal-50/50 px-2 py-1 text-xs text-teal-950">
             {t('result.minApplied')}
           </p>
         )}
         {quote.maxRuleApplied && (
-          <p className="rounded-lg bg-white/80 px-2 py-1 text-xs font-medium text-teal-900">
+          <p className="border border-teal-100 bg-teal-50/50 px-2 py-1 text-xs text-teal-950">
             {t('result.maxApplied')}
           </p>
         )}
         {quote.roundToTenApplied && (
-          <p className="rounded-lg bg-white/80 px-2 py-1 text-xs font-medium text-teal-900">
+          <p className="border border-teal-100 bg-teal-50/50 px-2 py-1 text-xs text-teal-950">
             {t('result.roundToTenApplied')} (
-            {formatMoney(quote.amountBeforeRoundToTen, locale)} →{' '}
-            {formatMoney(quote.amount, locale)})
+            <span className="receipt-mono">
+              {formatMoney(quote.amountBeforeRoundToTen, locale)} →{' '}
+              {formatMoney(quote.amount, locale)}
+            </span>
+            )
           </p>
         )}
-        <div className="flex justify-between gap-4 border-t border-teal-100 pt-3 text-base">
-          <dt className="font-semibold text-stone-900">{t('result.price')}</dt>
-          <dd className="text-right text-xl font-bold text-teal-800">
+        <div className="flex justify-between gap-4 border-t border-teal-300 pt-3">
+          <dt className="receipt-label text-teal-950">{t('result.price')}</dt>
+          <dd className="receipt-mono text-right text-2xl font-extrabold text-teal-700">
             {formatMoney(quote.amount, locale)}
           </dd>
         </div>

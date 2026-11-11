@@ -30,7 +30,7 @@ export function PricingSettings({
   const currencySuffix = locale === 'pt' ? 'R$/km' : '$/km'
 
   return (
-    <section className="rounded-2xl border border-stone-200 bg-white shadow-sm">
+    <section className="receipt-surface">
       <button
         type="button"
         onClick={onToggle}
@@ -38,7 +38,7 @@ export function PricingSettings({
         aria-expanded={open}
       >
         <span className="min-w-0 flex-1">
-          <span className="block text-sm font-semibold text-stone-900">
+          <span className="receipt-label text-xs text-teal-950">
             {t('header.settings')}
           </span>
           <span className="mt-0.5 block text-xs text-stone-500">
@@ -46,7 +46,7 @@ export function PricingSettings({
           </span>
         </span>
         <span
-          className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-teal-600 text-lg font-medium text-white"
+          className="flex size-9 shrink-0 items-center justify-center bg-teal-700 text-lg font-medium text-white"
           aria-hidden
         >
           {open ? '−' : '+'}
@@ -54,7 +54,7 @@ export function PricingSettings({
       </button>
 
       {open && (
-        <div className="space-y-4 border-t border-stone-100 px-4 py-4">
+        <div className="space-y-4 border-t border-teal-200 px-4 py-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-teal-800/80">
             {t('settings.title')}
           </p>
@@ -68,7 +68,7 @@ export function PricingSettings({
               onValueChange={(ratePerKm) =>
                 onChange((c) => ({ ...c, ratePerKm: Math.max(0, ratePerKm) }))
               }
-              className="w-full rounded-xl border border-stone-200 px-3 py-2.5 text-base outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+              className="input-receipt receipt-mono"
             />
           </label>
 
@@ -85,11 +85,11 @@ export function PricingSettings({
               onChange={(e) =>
                 onChange((c) => ({ ...c, baseAddress: e.target.value }))
               }
-              className="w-full rounded-xl border border-stone-200 px-3 py-2.5 text-base outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+              className="input-receipt receipt-mono"
             />
           </label>
 
-          <fieldset className="space-y-3 rounded-xl bg-stone-50 p-3">
+          <fieldset className="space-y-3 border border-dashed border-teal-200 bg-teal-50/30 p-3">
             <legend className="text-xs font-semibold text-stone-700">
               {t('settings.min.title')}
             </legend>
@@ -120,7 +120,7 @@ export function PricingSettings({
                         minDistanceMeters: Math.max(1, minDistanceMeters),
                       }))
                     }
-                    className="w-full rounded-lg border border-stone-200 px-3 py-2 text-base"
+                    className="input-receipt receipt-mono py-2 text-sm"
                   />
                 </label>
                 <label className="block space-y-1.5">
@@ -136,14 +136,14 @@ export function PricingSettings({
                         minAmount: Math.max(0, minAmount),
                       }))
                     }
-                    className="w-full rounded-lg border border-stone-200 px-3 py-2 text-base"
+                    className="input-receipt receipt-mono py-2 text-sm"
                   />
                 </label>
               </div>
             )}
           </fieldset>
 
-          <fieldset className="space-y-3 rounded-xl bg-stone-50 p-3">
+          <fieldset className="space-y-3 border border-dashed border-teal-200 bg-teal-50/30 p-3">
             <legend className="text-xs font-semibold text-stone-700">
               {t('settings.max.title')}
             </legend>
@@ -172,13 +172,13 @@ export function PricingSettings({
                       maxAmount: Math.max(0, maxAmount),
                     }))
                   }
-                  className="w-full rounded-lg border border-stone-200 px-3 py-2 text-base"
+                  className="input-receipt receipt-mono py-2 text-sm"
                 />
               </label>
             )}
           </fieldset>
 
-          <fieldset className="space-y-3 rounded-xl bg-stone-50 p-3">
+          <fieldset className="space-y-3 border border-dashed border-teal-200 bg-teal-50/30 p-3">
             <legend className="text-xs font-semibold text-stone-700">
               {t('settings.roundToTen.title')}
             </legend>

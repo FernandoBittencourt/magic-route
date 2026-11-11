@@ -109,17 +109,19 @@ export default function App() {
   }, [destinationInput, locale, originInput, pricing, t])
 
   return (
-    <div className="mx-auto flex min-h-full max-w-lg flex-col gap-4 px-4 py-4 pb-8">
-      <header className="space-y-3">
+    <div className="mx-auto flex min-h-full max-w-lg flex-col gap-3 px-4 py-4 pb-8">
+      <header className="header-rule">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-stone-900">
-              Magic Route
+            <h1 className="text-base font-extrabold tracking-[0.14em] text-teal-950">
+              MAGIC ROUTE
             </h1>
-            <p className="mt-0.5 text-sm text-stone-600">{t('app.subtitle')}</p>
+            <p className="mt-1 text-xs leading-snug text-stone-600">
+              {t('app.subtitle')}
+            </p>
           </div>
           <div
-            className="flex shrink-0 rounded-lg border border-stone-200 bg-white p-0.5 text-xs font-semibold"
+            className="flex shrink-0 border border-teal-300 bg-white p-0.5 text-[10px] font-bold"
             role="group"
             aria-label="Language"
           >
@@ -130,8 +132,8 @@ export default function App() {
                 onClick={() => setLocale(loc)}
                 className={
                   locale === loc
-                    ? 'rounded-md bg-teal-600 px-2.5 py-1.5 text-white'
-                    : 'rounded-md px-2.5 py-1.5 text-stone-600'
+                    ? 'bg-teal-700 px-2.5 py-1.5 text-white'
+                    : 'px-2.5 py-1.5 text-stone-600'
                 }
               >
                 {t(loc === 'pt' ? 'locale.pt' : 'locale.en')}
@@ -139,7 +141,6 @@ export default function App() {
             ))}
           </div>
         </div>
-
       </header>
 
       <PricingSettings
@@ -167,7 +168,7 @@ export default function App() {
 
       <QuoteResult quote={quote} />
 
-      <footer className="mt-auto space-y-1 text-center text-xs text-stone-500">
+      <footer className="mt-auto space-y-1 border-t border-teal-200/80 pt-3 text-center text-[10px] uppercase tracking-wide text-stone-500">
         <p>
           <a
             href="https://www.openstreetmap.org/copyright"

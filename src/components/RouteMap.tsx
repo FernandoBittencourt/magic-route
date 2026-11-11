@@ -72,7 +72,7 @@ export function RouteMap({ origin, destination, geometry }: RouteMapProps) {
     []
 
   return (
-    <div className="h-[42vh] min-h-[220px] w-full overflow-hidden rounded-2xl border border-stone-200 shadow-sm">
+    <div className="h-[36vh] min-h-[180px] w-full overflow-hidden border-2 border-dashed border-teal-300 bg-white">
       <MapContainer
         center={center}
         zoom={origin ? 13 : 4}
@@ -87,7 +87,7 @@ export function RouteMap({ origin, destination, geometry }: RouteMapProps) {
         {origin && <Marker position={[origin.lat, origin.lon]} />}
         {destination && <Marker position={[destination.lat, destination.lon]} />}
         {linePositions.length > 0 && (
-          <Polyline positions={linePositions} pathOptions={{ color: '#0d9488', weight: 5 }} />
+          <Polyline positions={linePositions} pathOptions={{ color: '#0f766e', weight: 5 }} />
         )}
       </MapContainer>
     </div>

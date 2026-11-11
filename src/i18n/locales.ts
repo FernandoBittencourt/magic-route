@@ -25,6 +25,7 @@ export type MessageKey =
   | 'settings.roundToTen.title'
   | 'settings.roundToTen.enabled'
   | 'result.title'
+  | 'result.receiptBanner'
   | 'result.distance'
   | 'result.duration'
   | 'result.price'
@@ -71,6 +72,7 @@ const pt: Messages = {
   'settings.roundToTen.enabled':
     'Arredondar valor final para cima (múltiplos de 10)',
   'result.title': 'Orçamento',
+  'result.receiptBanner': '— Orçamento —',
   'result.distance': 'Distância',
   'result.duration': 'Tempo estimado',
   'result.price': 'Valor',
@@ -116,6 +118,7 @@ const en: Messages = {
   'settings.roundToTen.title': 'Rounding (optional)',
   'settings.roundToTen.enabled': 'Round final amount up to nearest 10',
   'result.title': 'Quote',
+  'result.receiptBanner': '— Quote —',
   'result.distance': 'Distance',
   'result.duration': 'Estimated time',
   'result.price': 'Amount',
