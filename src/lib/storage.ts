@@ -16,6 +16,7 @@ const defaultPricing = (): PricingConfig => ({
   minAmount: 25,
   maxEnabled: false,
   maxAmount: 100,
+  roundToTenEnabled: false,
   baseAddress: '',
 })
 

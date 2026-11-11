@@ -7,6 +7,7 @@ export interface PricingConfig {
   minAmount: number
   maxEnabled: boolean
   maxAmount: number
+  roundToTenEnabled: boolean
   baseAddress: string
 }
 
@@ -29,5 +30,7 @@ export interface QuoteResult {
   proportionalAmount: number
   minRuleApplied: boolean
   maxRuleApplied: boolean
+  roundToTenApplied: boolean
+  amountBeforeRoundToTen: number
   geometry: GeoJSON.LineString
 }

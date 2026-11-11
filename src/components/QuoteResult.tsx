@@ -52,6 +52,13 @@ export function QuoteResult({ quote }: QuoteResultProps) {
             {t('result.maxApplied')}
           </p>
         )}
+        {quote.roundToTenApplied && (
+          <p className="rounded-lg bg-white/80 px-2 py-1 text-xs font-medium text-teal-900">
+            {t('result.roundToTenApplied')} (
+            {formatMoney(quote.amountBeforeRoundToTen, locale)} →{' '}
+            {formatMoney(quote.amount, locale)})
+          </p>
+        )}
         <div className="flex justify-between gap-4 border-t border-teal-100 pt-3 text-base">
           <dt className="font-semibold text-stone-900">{t('result.price')}</dt>
           <dd className="text-right text-xl font-bold text-teal-800">

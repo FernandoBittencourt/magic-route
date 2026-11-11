@@ -5,6 +5,8 @@ export interface PricingBreakdown {
   proportionalAmount: number
   minRuleApplied: boolean
   maxRuleApplied: boolean
+  roundToTenApplied: boolean
+  amountBeforeRoundToTen: number
 }
 
 export function calculateQuote(
@@ -17,6 +19,7 @@ export function calculateQuote(
   let amount = proportionalAmount
   let minRuleApplied = false
   let maxRuleApplied = false
+  let roundToTenApplied = false
 
   if (config.minEnabled && distanceMeters < config.minDistanceMeters) {
     amount = config.minAmount
@@ -28,11 +31,24 @@ export function calculateQuote(
     maxRuleApplied = true
   }
 
+  amount = Math.round(amount * 100) / 100
+  const amountBeforeRoundToTen = amount
+
+  if (config.roundToTenEnabled && amount > 0) {
+    const rounded = Math.ceil(amount / 10) * 10
+    if (rounded !== amount) {
+      roundToTenApplied = true
+      amount = rounded
+    }
+  }
+
   return {
-    amount: Math.round(amount * 100) / 100,
+    amount,
     proportionalAmount,
     minRuleApplied,
     maxRuleApplied,
+    roundToTenApplied,
+    amountBeforeRoundToTen,
   }
 }
 

@@ -22,6 +22,8 @@ export type MessageKey =
   | 'settings.max.title'
   | 'settings.max.enabled'
   | 'settings.max.amount'
+  | 'settings.roundToTen.title'
+  | 'settings.roundToTen.enabled'
   | 'result.title'
   | 'result.distance'
   | 'result.duration'
@@ -29,6 +31,7 @@ export type MessageKey =
   | 'result.proportional'
   | 'result.minApplied'
   | 'result.maxApplied'
+  | 'result.roundToTenApplied'
   | 'errors.emptyOrigin'
   | 'errors.emptyDestination'
   | 'errors.geocodeNotFound'
@@ -64,6 +67,9 @@ const pt: Messages = {
   'settings.max.title': 'Valor máximo (opcional)',
   'settings.max.enabled': 'Limitar ao teto',
   'settings.max.amount': 'Teto',
+  'settings.roundToTen.title': 'Arredondamento (opcional)',
+  'settings.roundToTen.enabled':
+    'Arredondar valor final para cima (múltiplos de 10)',
   'result.title': 'Orçamento',
   'result.distance': 'Distância',
   'result.duration': 'Tempo estimado',
@@ -71,6 +77,7 @@ const pt: Messages = {
   'result.proportional': 'Só pela distância',
   'result.minApplied': 'Mínimo (abaixo do limite em m)',
   'result.maxApplied': 'Teto máximo aplicado',
+  'result.roundToTenApplied': 'Arredondado para cima (múltiplo de 10)',
   'errors.emptyOrigin': 'Informe a origem.',
   'errors.emptyDestination': 'Informe o destino.',
   'errors.geocodeNotFound':
@@ -106,6 +113,8 @@ const en: Messages = {
   'settings.max.title': 'Maximum charge (optional)',
   'settings.max.enabled': 'Cap the quote',
   'settings.max.amount': 'Ceiling',
+  'settings.roundToTen.title': 'Rounding (optional)',
+  'settings.roundToTen.enabled': 'Round final amount up to nearest 10',
   'result.title': 'Quote',
   'result.distance': 'Distance',
   'result.duration': 'Estimated time',
@@ -113,6 +122,7 @@ const en: Messages = {
   'result.proportional': 'Distance only',
   'result.minApplied': 'Minimum (below distance threshold)',
   'result.maxApplied': 'Maximum cap applied',
+  'result.roundToTenApplied': 'Rounded up to nearest 10',
   'errors.emptyOrigin': 'Enter an origin.',
   'errors.emptyDestination': 'Enter a destination.',
   'errors.geocodeNotFound':

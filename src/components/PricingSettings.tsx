@@ -177,6 +177,26 @@ export function PricingSettings({
               </label>
             )}
           </fieldset>
+
+          <fieldset className="space-y-3 rounded-xl bg-stone-50 p-3">
+            <legend className="text-xs font-semibold text-stone-700">
+              {t('settings.roundToTen.title')}
+            </legend>
+            <label className="flex items-center gap-2 text-sm text-stone-700">
+              <input
+                type="checkbox"
+                checked={config.roundToTenEnabled}
+                onChange={(e) =>
+                  onChange((c) => ({
+                    ...c,
+                    roundToTenEnabled: e.target.checked,
+                  }))
+                }
+                className="size-4 rounded border-stone-300 text-teal-600"
+              />
+              {t('settings.roundToTen.enabled')}
+            </label>
+          </fieldset>
         </div>
       )}
     </section>

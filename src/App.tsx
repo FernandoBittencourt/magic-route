@@ -89,6 +89,8 @@ export default function App() {
         proportionalAmount: breakdown.proportionalAmount,
         minRuleApplied: breakdown.minRuleApplied,
         maxRuleApplied: breakdown.maxRuleApplied,
+        roundToTenApplied: breakdown.roundToTenApplied,
+        amountBeforeRoundToTen: breakdown.amountBeforeRoundToTen,
         geometry: route.geometry,
       })
     } catch (err) {
