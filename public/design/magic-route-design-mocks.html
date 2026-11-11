@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Magic Route — 4 opções de design</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #1c1917;
+      color: #292524;
+      padding: 32px 24px 48px;
+    }
+    h1 {
+      color: #fafaf9;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .sub {
+      text-align: center;
+      color: #a8a29e;
+      font-size: 0.85rem;
+      margin-bottom: 32px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 390px);
+      gap: 24px;
+      justify-content: center;
+    }
+    .col-label {
+      color: #e7e5e4;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Magic Route — mock estático (mobile 390px)</h1>
+  <p class="sub">A · B · C · D — não implementado no app; só referência visual</p>
+  <div class="grid">
+
+    <!-- A Rota Serena -->
+    <div>
+      <p class="col-label">A — Rota Serena</p>
+      <div style="width:390px;height:844px;background:#f5f5f4;border-radius:28px;overflow:hidden;border:1px solid #e7e5e4;padding:16px;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-size:20px;font-weight:700;color:#1c1917">Magic Route</div>
+            <div style="font-size:13px;color:#57534e;margin-top:2px">Taxa por distância no atendimento</div>
+          </div>
+          <div style="display:flex;background:#fff;border:1px solid #e7e5e4;border-radius:8px;padding:2px;font-size:11px;font-weight:600">
+            <span style="background:#0d9488;color:#fff;padding:6px 10px;border-radius:6px">PT</span>
+            <span style="padding:6px 10px;color:#78716c">EN</span>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:12px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:14px;font-weight:600">Configurações</div>
+            <div style="font-size:11px;color:#78716c">Taxa, mín, máx, endereço base</div>
+          </div>
+          <div style="width:36px;height:36px;background:#0d9488;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px">+</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:14px;flex-shrink:0">
+          <div style="font-size:11px;color:#78716c;margin-bottom:8px">Endereço em português no Brasil</div>
+          <div style="font-size:11px;font-weight:600;color:#57534e;margin-bottom:4px">Origem</div>
+          <div style="border:1px solid #e7e5e4;border-radius:12px;padding:10px;font-size:14px;color:#1c1917;margin-bottom:10px">Rua das Flores, 120, SP</div>
+          <div style="font-size:11px;font-weight:600;color:#57534e;margin-bottom:4px">Destino</div>
+          <div style="border:1px solid #e7e5e4;border-radius:12px;padding:10px;font-size:14px;margin-bottom:12px">Av. Paulista, 1000</div>
+          <div style="background:#0d9488;color:#fff;text-align:center;padding:14px;border-radius:12px;font-weight:600;font-size:15px">Calcular valor</div>
+        </div>
+        <div style="height:140px;background:linear-gradient(180deg,#d6e8e4 0%,#c5ddd6 100%);border-radius:16px;border:1px solid #e7e5e4;position:relative;overflow:hidden">
+          <svg width="100%" height="100%" viewBox="0 0 360 140"><path d="M40 100 Q120 40 200 70 T320 50" fill="none" stroke="#0d9488" stroke-width="6" stroke-linecap="round"/><circle cx="40" cy="100" r="6" fill="#0d9488"/><circle cx="320" cy="50" r="6" fill="#0d9488"/></svg>
+          <span style="position:absolute;bottom:6px;left:8px;font-size:9px;color:#57534e">© OSM</span>
+        </div>
+        <div style="background:linear-gradient(135deg,#f0fdfa,#fff);border:1px solid #99f6e4;border-radius:16px;padding:14px;margin-top:auto">
+          <div style="font-size:12px;font-weight:600;color:#115e59;margin-bottom:8px">Orçamento</div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Distância</span><span style="font-weight:600">8,2 km</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px"><span>Valor</span><span style="font-size:22px;font-weight:700;color:#0f766e">R$ 80,00</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B Consulta em Casa -->
+    <div>
+      <p class="col-label">B — Consulta em Casa</p>
+      <div style="width:390px;height:844px;background:#fffbeb;border-radius:28px;overflow:hidden;border:1px solid #fde68a;padding:16px;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-size:20px;font-weight:600;color:#431407">Magic Route</div>
+            <div style="font-size:13px;color:#9a3412;margin-top:2px">Sua visita, seu valor justo</div>
+          </div>
+          <div style="display:flex;background:#fff;border:1px solid #fed7aa;border-radius:8px;padding:2px;font-size:11px;font-weight:600">
+            <span style="background:#e11d48;color:#fff;padding:6px 10px;border-radius:6px">PT</span>
+            <span style="padding:6px 10px;color:#a8a29e">EN</span>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #fecdd3;border-radius:20px;padding:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(190,18,60,.06)">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#881337">Configurações</div>
+            <div style="font-size:11px;color:#9f1239">Regras de preço</div>
+          </div>
+          <div style="width:36px;height:36px;background:#e11d48;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center">+</div>
+        </div>
+        <div style="background:#fff;border:1px solid #ffe4e6;border-radius:20px;padding:14px">
+          <div style="font-size:11px;color:#9a3412;margin-bottom:8px">Casa → cliente</div>
+          <div style="font-size:11px;font-weight:600;color:#881337;margin-bottom:4px">Origem</div>
+          <div style="border:1px solid #fecdd3;border-radius:14px;padding:10px;font-size:14px;margin-bottom:10px;background:#fff7ed">Salão Bela, Centro</div>
+          <div style="font-size:11px;font-weight:600;color:#881337;margin-bottom:4px">Destino</div>
+          <div style="border:1px solid #fecdd3;border-radius:14px;padding:10px;font-size:14px;margin-bottom:12px;background:#fff7ed">Rua Cliente, 45</div>
+          <div style="background:#e11d48;color:#fff;text-align:center;padding:14px;border-radius:14px;font-weight:600">Calcular valor</div>
+        </div>
+        <div style="height:130px;background:#ffedd5;border-radius:20px;border:1px solid #fed7aa;position:relative">
+          <svg width="100%" height="100%" viewBox="0 0 360 130"><path d="M50 90 Q150 35 260 65" fill="none" stroke="#e11d48" stroke-width="5"/><circle cx="50" cy="90" r="7" fill="#fb923c"/><circle cx="260" cy="65" r="7" fill="#e11d48"/></svg>
+        </div>
+        <div style="background:#fff;border:2px solid #fda4af;border-radius:20px;padding:16px;text-align:center;margin-top:auto">
+          <div style="font-size:11px;color:#9f1239;font-weight:600;margin-bottom:4px">VALOR DA VISITA</div>
+          <div style="font-size:40px;font-weight:700;color:#be123c;line-height:1">R$ 80</div>
+          <div style="font-size:12px;color:#78716c;margin-top:6px">8,2 km · ~18 min</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C Mapa primeiro -->
+    <div>
+      <p class="col-label">C — Mapa primeiro</p>
+      <div style="width:390px;height:844px;background:#f8fafc;border-radius:28px;overflow:hidden;border:1px solid #e2e8f0;padding:0;display:flex;flex-direction:column;">
+        <div style="padding:14px 16px 8px;background:#fff;border-bottom:1px solid #e2e8f0">
+          <div style="display:flex;justify-content:space-between">
+            <div style="font-size:18px;font-weight:700;color:#0f172a">Magic Route</div>
+            <span style="font-size:11px;background:#eef2ff;color:#4f46e5;padding:4px 8px;border-radius:6px;font-weight:600">PT</span>
+          </div>
+        </div>
+        <div style="height:320px;background:linear-gradient(180deg,#dbeafe,#93c5fd);position:relative;flex-shrink:0">
+          <svg width="100%" height="100%" viewBox="0 0 390 320"><path d="M60 250 Q180 80 330 120" fill="none" stroke="#4f46e5" stroke-width="7"/><circle cx="60" cy="250" r="8" fill="#312e81"/><circle cx="330" cy="120" r="8" fill="#4f46e5"/></svg>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);padding:10px 12px;border-top:1px solid #e2e8f0">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px">
+              <input style="border:1px solid #cbd5e1;border-radius:8px;padding:8px" value="Origem…" readonly />
+              <input style="border:1px solid #cbd5e1;border-radius:8px;padding:8px" value="Destino…" readonly />
+            </div>
+            <div style="margin-top:8px;background:#4f46e5;color:#fff;text-align:center;padding:10px;border-radius:8px;font-size:13px;font-weight:600">Calcular</div>
+          </div>
+        </div>
+        <div style="padding:12px 16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:11px;color:#64748b">Configurações · taxa R$ 10/km</div>
+          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+            <div>
+              <div style="font-size:12px;color:#64748b">Total</div>
+              <div style="font-size:28px;font-weight:700;color:#4f46e5">R$ 80,00</div>
+            </div>
+            <div style="text-align:right;font-size:12px;color:#475569">8,2 km<br/>18 min</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D Recibo digital -->
+    <div>
+      <p class="col-label">D — Recibo digital</p>
+      <div style="width:390px;height:844px;background:#fafafa;border-radius:28px;overflow:hidden;border:2px solid #171717;padding:16px;display:flex;flex-direction:column;gap:10px;font-family:system-ui,sans-serif">
+        <div style="display:flex;justify-content:space-between;border-bottom:2px solid #171717;padding-bottom:10px">
+          <span style="display:block;font-size:16px;font-weight:800;letter-spacing:-0.02em">MAGIC ROUTE</span>
+          <span style="font-size:10px;border:1px solid #171717;padding:4px 6px">PT | EN</span>
+        </div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#525252">Configurações +</div>
+        <div style="border:1px solid #d4d4d4;padding:12px;background:#fff">
+          <div style="font-size:10px;font-weight:700;margin-bottom:4px">ORIGEM</div>
+          <div style="font-size:13px;margin-bottom:8px;font-family:ui-monospace,monospace">Rua das Flores, 120</div>
+          <div style="font-size:10px;font-weight:700;margin-bottom:4px">DESTINO</div>
+          <div style="font-size:13px;margin-bottom:10px;font-family:ui-monospace,monospace">Av. Paulista, 1000</div>
+          <div style="background:#171717;color:#fff;text-align:center;padding:12px;font-size:12px;font-weight:700">CALCULAR</div>
+        </div>
+        <div style="height:90px;border:1px dashed #a3a3a3;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:10px;color:#737373">[ mapa preview ]</div>
+        <div style="border:2px dashed #171717;padding:16px;background:#fff;margin-top:auto">
+          <div style="text-align:center;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:12px">—— RECIBO ——</div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px"><span>Distância</span><span style="font-family:ui-monospace,monospace">8.200 m</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px"><span>Taxa/km</span><span style="font-family:ui-monospace,monospace">10,00</span></div>
+          <div style="border-top:1px solid #171717;padding-top:10px;display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font-size:11px;font-weight:700">TOTAL</span>
+            <span style="font-size:32px;font-weight:800;font-family:ui-monospace,monospace;color:#059669">80,00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

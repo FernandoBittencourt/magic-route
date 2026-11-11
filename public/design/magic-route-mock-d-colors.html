@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Magic Route — D Recibo (paletas)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0a0a0a;
+      padding: 28px 20px 40px;
+    }
+    h1 { color: #fafafa; text-align: center; font-size: 1.1rem; margin-bottom: 6px; }
+    p.sub { color: #a3a3a3; text-align: center; font-size: 0.8rem; margin-bottom: 28px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 300px);
+      gap: 20px;
+      justify-content: center;
+    }
+    .tag {
+      color: #e5e5e5;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Opção D — Recibo digital (5 paletas de cor)</h1>
+  <p class="sub">Mesmo layout; só muda cor. Escolha D1–D5.</p>
+  <div class="grid" id="grid"></div>
+  <script>
+    const variants = [
+      {
+        id: 'D1',
+        name: 'Papel térmico',
+        bg: '#f4f1ea',
+        frame: '#78716c',
+        text: '#44403c',
+        muted: '#78716c',
+        border: '#a8a29e',
+        btn: '#57534e',
+        btnText: '#fafaf9',
+        accent: '#b45309',
+        receipt: '#fffef9',
+        dash: '#d6d3d1',
+      },
+      {
+        id: 'D2',
+        name: 'Azul nota fiscal',
+        bg: '#f8fafc',
+        frame: '#1e3a5f',
+        text: '#0f172a',
+        muted: '#64748b',
+        border: '#94a3b8',
+        btn: '#1e40af',
+        btnText: '#fff',
+        accent: '#1d4ed8',
+        receipt: '#ffffff',
+        dash: '#cbd5e1',
+      },
+      {
+        id: 'D3',
+        name: 'Teal Magic Route',
+        bg: '#f5f5f4',
+        frame: '#134e4a',
+        text: '#1c1917',
+        muted: '#57534e',
+        border: '#5eead4',
+        btn: '#0f766e',
+        btnText: '#fff',
+        accent: '#0d9488',
+        receipt: '#ffffff',
+        dash: '#99f6e4',
+      },
+      {
+        id: 'D4',
+        name: 'Grafite suave',
+        bg: '#fafafa',
+        frame: '#3f3f46',
+        text: '#27272a',
+        muted: '#71717a',
+        border: '#d4d4d8',
+        btn: '#52525b',
+        btnText: '#fff',
+        accent: '#2563eb',
+        receipt: '#ffffff',
+        dash: '#a1a1aa',
+      },
+      {
+        id: 'D5',
+        name: 'Terracota domicílio',
+        bg: '#fff7ed',
+        frame: '#9a3412',
+        text: '#431407',
+        muted: '#9a3412',
+        border: '#fdba74',
+        btn: '#c2410c',
+        btnText: '#fff',
+        accent: '#ea580c',
+        receipt: '#fffbeb',
+        dash: '#fed7aa',
+      },
+    ];
+
+    function phone(v) {
+      return `
+      <div class="tag">${v.id} — ${v.name}</div>
+      <div style="width:300px;height:620px;background:${v.bg};border-radius:22px;border:2px solid ${v.frame};padding:14px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid ${v.frame};padding-bottom:8px">
+          <span style="font-size:13px;font-weight:800;letter-spacing:0.04em;color:${v.text}">MAGIC ROUTE</span>
+          <span style="font-size:9px;border:1px solid ${v.border};padding:3px 5px;color:${v.muted}">PT</span>
+        </div>
+        <div style="font-size:9px;text-transform:uppercase;color:${v.muted};letter-spacing:.06em">Configurações +</div>
+        <div style="border:1px solid ${v.border};padding:10px;background:${v.receipt}">
+          <div style="font-size:9px;font-weight:700;color:${v.text};margin-bottom:3px">ORIGEM</div>
+          <div style="font-size:12px;font-family:ui-monospace,monospace;color:${v.text};margin-bottom:6px">Rua das Flores, 120</div>
+          <div style="font-size:9px;font-weight:700;color:${v.text};margin-bottom:3px">DESTINO</div>
+          <div style="font-size:12px;font-family:ui-monospace,monospace;color:${v.text};margin-bottom:8px">Av. Paulista, 1000</div>
+          <div style="background:${v.btn};color:${v.btnText};text-align:center;padding:10px;font-size:11px;font-weight:700">CALCULAR</div>
+        </div>
+        <div style="height:72px;border:1px dashed ${v.dash};display:flex;align-items:center;justify-content:center;font-size:9px;color:${v.muted};background:${v.receipt}">mapa</div>
+        <div style="border:2px dashed ${v.frame};padding:14px;background:${v.receipt};margin-top:auto">
+          <div style="text-align:center;font-size:9px;font-weight:700;letter-spacing:.12em;color:${v.muted};margin-bottom:10px">— RECIBO —</div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:${v.text};margin-bottom:4px">
+            <span>Distância</span><span style="font-family:ui-monospace,monospace">8,2 km</span>
+          </div>
+          <div style="border-top:1px solid ${v.border};margin-top:8px;padding-top:8px;display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font-size:10px;font-weight:700;color:${v.text}">TOTAL</span>
+            <span style="font-size:26px;font-weight:800;font-family:ui-monospace,monospace;color:${v.accent}">R$ 80</span>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    document.getElementById('grid').innerHTML = variants.map(phone).join('');
+  </script>
+</body>
+</html>
