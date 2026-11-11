@@ -30,7 +30,11 @@ export default function App() {
       setPricing((prev) => {
         const next = typeof action === 'function' ? action(prev) : action
         if (next.baseAddress !== prev.baseAddress) {
-          setOriginInput(next.baseAddress)
+          setOriginInput((origin) =>
+            origin === '' || origin === prev.baseAddress
+              ? next.baseAddress
+              : origin,
+          )
         }
         return next
       })

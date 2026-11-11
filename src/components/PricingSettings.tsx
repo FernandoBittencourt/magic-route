@@ -1,4 +1,5 @@
 import { useEffect, type Dispatch, type SetStateAction } from 'react'
+import { NumericInput } from './NumericInput'
 import { useI18n } from '../i18n/I18nProvider'
 import { savePricingConfig } from '../lib/storage'
 import type { PricingConfig } from '../types'
@@ -61,17 +62,11 @@ export function PricingSettings({
             <span className="text-xs font-medium text-stone-600">
               {t('settings.ratePerKm')} ({currencySuffix})
             </span>
-            <input
-              type="number"
-              inputMode="decimal"
-              min={0}
-              step="0.5"
+            <NumericInput
               value={config.ratePerKm}
-              onChange={(e) =>
-                onChange((c) => ({
-                  ...c,
-                  ratePerKm: Number.parseFloat(e.target.value) || 0,
-                }))
+              emptyFallback={0}
+              onValueChange={(ratePerKm) =>
+                onChange((c) => ({ ...c, ratePerKm: Math.max(0, ratePerKm) }))
               }
               className="w-full rounded-xl border border-stone-200 px-3 py-2.5 text-base outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
             />
@@ -115,16 +110,14 @@ export function PricingSettings({
                   <span className="text-xs text-stone-600">
                     {t('settings.min.distance')}
                   </span>
-                  <input
-                    type="number"
-                    inputMode="numeric"
-                    min={1}
+                  <NumericInput
+                    integer
                     value={config.minDistanceMeters}
-                    onChange={(e) =>
+                    emptyFallback={1000}
+                    onValueChange={(minDistanceMeters) =>
                       onChange((c) => ({
                         ...c,
-                        minDistanceMeters:
-                          Number.parseInt(e.target.value, 10) || 1000,
+                        minDistanceMeters: Math.max(1, minDistanceMeters),
                       }))
                     }
                     className="w-full rounded-lg border border-stone-200 px-3 py-2 text-base"
@@ -134,16 +127,13 @@ export function PricingSettings({
                   <span className="text-xs text-stone-600">
                     {t('settings.min.amount')}
                   </span>
-                  <input
-                    type="number"
-                    inputMode="decimal"
-                    min={0}
-                    step="0.01"
+                  <NumericInput
                     value={config.minAmount}
-                    onChange={(e) =>
+                    emptyFallback={0}
+                    onValueChange={(minAmount) =>
                       onChange((c) => ({
                         ...c,
-                        minAmount: Number.parseFloat(e.target.value) || 0,
+                        minAmount: Math.max(0, minAmount),
                       }))
                     }
                     className="w-full rounded-lg border border-stone-200 px-3 py-2 text-base"
@@ -173,16 +163,13 @@ export function PricingSettings({
                 <span className="text-xs text-stone-600">
                   {t('settings.max.amount')}
                 </span>
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min={0}
-                  step="0.01"
+                <NumericInput
                   value={config.maxAmount}
-                  onChange={(e) =>
+                  emptyFallback={0}
+                  onValueChange={(maxAmount) =>
                     onChange((c) => ({
                       ...c,
-                      maxAmount: Number.parseFloat(e.target.value) || 0,
+                      maxAmount: Math.max(0, maxAmount),
                     }))
                   }
                   className="w-full rounded-lg border border-stone-200 px-3 py-2 text-base"
